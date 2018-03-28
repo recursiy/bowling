@@ -63,6 +63,11 @@ namespace //anonymous
         }
 
     public:
+        WinTableBuilder()
+            : m_tableWidth(0)
+        {
+        }
+
         void Build(std::ostream& out, const PlayersTable& table)
         {
             m_tableWidth = 0;

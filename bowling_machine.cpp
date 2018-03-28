@@ -35,6 +35,8 @@ namespace //anonymous
                     throw std::runtime_error("Hit value is more then 10");
                 currentResult.push_back(hit);
                 currentFrame.result += hit;
+                if (currentFrame.result > 10)
+                    throw std::runtime_error("Frame value can be more than 10 only in case of spare or strike");
 
                 bool frameOver = false;
                 if (currentResult.size() == 2)
@@ -46,7 +48,7 @@ namespace //anonymous
                     {
                         //spare
                         currentFrame.hit.push_back(SpareSign);
-                        if (hits.hits.size() < i + 1)
+                        if (hits.hits.size() <= i + 1)
                             throw std::runtime_error("Not enought hit values");
                         currentFrame.result += hits.hits[i + 1];
                         if (frameNumber == FramesPerGame)   //10-th frame
@@ -66,7 +68,7 @@ namespace //anonymous
                 {
                     //strike
                     currentFrame.hit.push_back(StrikeSign);
-                    if (hits.hits.size() < i + 2)
+                    if (hits.hits.size() <= i + 2)
                         throw std::runtime_error("Not enought hit values");
                     currentFrame.result += hits.hits[i + 1] + hits.hits[i + 2];
                     if (frameNumber == FramesPerGame)   //10th frame
